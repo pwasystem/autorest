@@ -14,6 +14,7 @@ class Autorest {
 			password : conf.database.pass,
 			database : conf.database.schema,
 			connectionLimit: 5
+			//criar comando para tratar resuldados incompatíveis
 		});
 		this.rest = {};
 	}
