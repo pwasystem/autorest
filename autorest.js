@@ -6,13 +6,7 @@ class Autorest {
 		this.listen = conf.server.port;
 		this.domain = `${conf.server.protocol}://${conf.server.domain}`;
 		this.origin = `${conf.server.protocol}://${conf.server.origin}`;
-		
-		/*this.dbhost = conf.database.host;
-		this.dbport = conf.database.port;
-		this.dbuser = conf.database.user;
-		this.dbpassword = conf.database.password;
-		this.dbschema = conf.database.schema;*/
-		
+		this.fs = require('fs');
 		this.mariadb = require('mariadb');
 		this.pool = this.mariadb.createPool({
 			host : conf.database.host, 
@@ -21,9 +15,6 @@ class Autorest {
 			database : conf.database.schema,
 			connectionLimit: 5
 		});
-		
-		this.fs = require('fs');
-		
 		this.rest = {};
 	}
 
