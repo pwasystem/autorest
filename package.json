@@ -1,0 +1,26 @@
+{
+  "name": "autorest",
+  "version": "1.0.0",
+  "description": "Create abstract RESTFul API to MySQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "REST",
+    "RESTFul",
+    "API",
+    "API",
+    "REST",
+    "Node",
+    "MariaDB",
+    "MySQL"
+  ],
+  "author": "Luiz Roberto Nogueira Junior",
+  "license": "ISC",
+  "homepage": "https://github.com/pwasystem/autorest#readme",
+  "dependencies": {
+    "mariadb": "^3.2.3"
+  }
+}

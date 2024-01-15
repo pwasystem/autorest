@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='pt'>
+	<head>
+		<title>Autorest - test</title>
+		<script>
+		async function postData(url = "", data = {}, method = 'GET') {
+			if(method=='POST'||method=='PUT'||method=='DELETE'){
+				let option = await fetch(url, {
+					method: 'OPTIONS',
+					headers: {
+						'Connection' : 'keep-alive',
+						'Access-Control-Request-Method' : method,
+						'Access-Control-Request-Headers' : 'X-Csrf-Token, Content-Type'
+					}
+				});				
+			}			
+			let header = {method: method};
+			if(method!='GET'&&method!='OPTION'){			
+				header = Object.assign(header,{"Content-Type": "text/xml","X-Csrf-Token": "pingpong"},{mode:"cors"});
+				if(method=='POST'||method=='PUT') header = Object.assign(header,{body: data});
+			}
+			let response = await fetch(url, header);	
+			if(response.status==200){
+				console.log(response)
+				json = await response.json();
+				showJson.innerHTML = JSON.stringify(json, null, "\t");				
+				for(x in json.body){
+					//Diferenciar formulários
+					document.getElementById(x).innerHTML=json.body[x];
+				}
+			}
+		}
+		</script>
+	</head>
+	<body bgcolor='whitesmoke'>
+		<select id='method'><option selected value='GET'>GET<option value='PUT'>PUT<option value='POST'>POST<option value='DELETE'>DELETE<option value='OPTION'>OPTION</select>
+		<input type='text' id='uri' value='http://localhost:3000/articles/page/1' size='39'>
+		<br>
+		<textarea id='data' rows='3' cols='50'>{"title":"Article 1","headline":"Headline of a article 1","text":"Article 1 text"}</textarea>
+		<br>
+		<button id='btn' onclick='postData(uri.value,data.value,method.value)'>Action</button>
+		<br>
+		<pre id='showJson'></pre>
+		<article>
+			<h2 id='title'></h2>
+			<p id='headline'></p>
+			<p id='text'></p>
+		</article>
+	</body>
+</html>
